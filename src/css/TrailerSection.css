@@ -1,0 +1,33 @@
+.TrailerSection{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #303030;
+}
+
+.player{
+    width: 730px;
+    height: 390px;
+}
+
+.closevideo{
+    border: none;
+    outline: none;
+    font-size: 28px;
+    text-align: center;
+    color: white;
+    background-color: transparent;
+    position:absolute;
+    top: 15px;
+    right: 18px;
+    transition: .3s ease-in-out;
+}
+
+.closevideo:hover{
+    transform: rotate(90deg);
+    color: #e53935;
+}
