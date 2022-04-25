@@ -57,20 +57,22 @@
 @media only screen and (max-width: 768px) {
     .MovieDetailsContainer {
         flex-wrap: wrap;
-        padding: 20px;
+        padding: 30px;
         row-gap: 15px;
         justify-content: space-evenly;
     }
 
     .MovieDetailsImage {
-        width: 290px;
-        height: 420px;
+        width: 100%;
+        height: auto;
     }
 
     .MovieDetailsInfo {
         row-gap: 12px;
         justify-content: flex-start;
         padding-bottom: 0px;
+        padding-top: 7px;
+        border-top: 1px solid rgb(189, 186, 186);
     }
 
     .MovieDetailsName {

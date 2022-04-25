@@ -29,9 +29,9 @@ const fetchMoviesFailure = error => {
     }
 }
 
-export const fetchMoviesInfo = (searchKey,sortbyKey,currentPage) => {
+export const fetchMoviesInfo = (searchKey,sortKey='popular',currentPage) => {
     const api_key = "4e44d9029b1270a757cddc766a1bcb63";
-    const Movieslink=`https://api.themoviedb.org/3/movie/${sortbyKey}?api_key=${api_key}&language=en-US&page=${currentPage}`;
+    const Movieslink=`https://api.themoviedb.org/3/movie/${sortKey}?api_key=${api_key}&language=en-US&page=${currentPage}`;
     const searchMovielink=`https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${searchKey}&page=1&include_adult=false`;
     const Link=searchKey==null? Movieslink:searchMovielink;
 

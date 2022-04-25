@@ -4,12 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchVideoInfo } from '../redux/fetchMovies/moviesAction';
 import Loader from './Loader';
 import Notfound from './Notfound';
+import { useParams } from 'react-router-dom';
 import '../css/TrailerSection.css';
 
 
-function TrailerSection({ trailersHandler, trailersPayload }) {
+function TrailerSection() {
   let trailerLink;
   const path ="https://www.youtube.com/watch?v=";
+  // const params = useParams();
+  // const movieID = params.movieID;
+  const {movieID} = useParams();
   const dispatch = useDispatch();
   const { loading, trailerInfo } = useSelector(state => state);
   
@@ -20,13 +24,8 @@ function TrailerSection({ trailersHandler, trailersPayload }) {
     }
   });
 
-  const closevideoHandler =()=>{
-    trailersHandler(false,trailersPayload);
-    document.getElementsByClassName("Navbar")[0].style.display = "flex";;
-  };
-
   useEffect(() =>
-    dispatch(fetchVideoInfo(trailersPayload.id))
+    dispatch(fetchVideoInfo(movieID))
     , [])
 
   if (loading) {
@@ -34,14 +33,10 @@ function TrailerSection({ trailersHandler, trailersPayload }) {
   }
   else {
     return (<div className='TrailerSection'>
-      {trailerLink == "" ? <Notfound>Trailer not available</Notfound> : 
+      {trailerLink == undefined ? <Notfound>Trailer not available</Notfound> : 
       <div className='player'><ReactPlayer controls url={trailerLink} width='100%' height='100%'/></div>}
-      <button onClick={closevideoHandler} className='closevideo'>
-        <i className="fa-solid fa-xmark"></i>
-      </button>
     </div>);
   }
 
 }
-
 export default TrailerSection;

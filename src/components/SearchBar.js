@@ -1,40 +1,24 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 import '../css/SearchBar.css';
-import { fetchMoviesInfo } from '../redux/fetchMovies/moviesAction';
-import { useDispatch } from 'react-redux';
 
 function SearchBar() {
-  const dispatch = useDispatch();
   const [searchkey, setsearchkey] = useState("");
+  const navigate = useNavigate();
   const invalidRef = useRef(null);
-  // const [handleSearch, sethandleSearch] = useState(false);
 
   const handleSearchKey = (e) => {
     setsearchkey(e.target.value);
   }
 
   const handleSubmit = (e) => {
-    if (searchkey != "") {
-    dispatch(fetchMoviesInfo(searchkey))
-    }
-    else{
-      invalidRef.current.style.display = "inline-block";
-    }
+    (searchkey == "") ? invalidRef.current.style.display = "inline-block" : navigate(`/search/${searchkey}`);
     e.preventDefault();
   }
 
   const focusHandler =()=>{
     invalidRef.current.style.display = "none";
   }
-
-
-  // useEffect(() => {
-  //   if (handleSearch == true && searchkey != "") {
-  //     dispatch(fetchMoviesInfo(searchkey))
-  //     sethandleSearch(false);
-  //     setsearchkey("");
-  //   }
-  // }, [handleSearch])
 
   return (
     <div className='Searchbar_container'>
@@ -47,5 +31,4 @@ function SearchBar() {
     </div>
   );
 }
-
 export default SearchBar

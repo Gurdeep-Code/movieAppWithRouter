@@ -3,37 +3,30 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchMoviesInfo } from '../../redux/fetchMovies/moviesAction';
 import Sortby from './Sortby';
 import Pageination from './Pageination';
-import CardContainer from '../cardComp/CardContainer';
 import Loader from '../Loader';
 import Notfound from '../Notfound';
+import { useParams, Outlet } from 'react-router-dom';
 import '../../css/MoviesSection.css'
 
-function MoviesSection({ trailersHandler, detailsHandler }) {
+function MoviesSection() {
   const dispatch = useDispatch();
+  const { sortKey } = useParams();
   const { loading, moviesInfo } = useSelector(state => state);
-  const [sortTypeState, setSorttype] = useState("popular");
   const [currentPage, setCurrentPage] = useState(1);
-  const isMoviesinfoEmpty = (moviesInfo.length === 0) ? true : false;
 
   useEffect(() =>
-    dispatch(fetchMoviesInfo(null, sortTypeState, currentPage))
-    , [sortTypeState, currentPage])
-
+    dispatch(fetchMoviesInfo(null, sortKey, currentPage))
+    , [sortKey, currentPage])
 
   return (
     <div className='MoviesSection'>
-      <Sortby sortType={sortTypeState} sortTypeHandler={setSorttype} updatePage={setCurrentPage} />
-      {loading ? <Loader /> : isMoviesinfoEmpty ? <Notfound>No search found</Notfound> :
+      <Sortby updatePage={setCurrentPage} />
+      {loading ? <Loader /> :
         (<>
-          <CardContainer trailersHandler={trailersHandler} detailsHandler={detailsHandler} moviesInfo={moviesInfo} />
-          <Pageination currentPage={currentPage} updatePage={setCurrentPage}/>
+          <Outlet context={{ moviesInfo }} />
+          <Pageination currentPage={currentPage} updatePage={setCurrentPage} />
         </>)}
     </div>);
 }
 
 export default MoviesSection;
-
-
-// const sorttypeHandler = (type) => {
-  //   setSorttype(type)
-  // }

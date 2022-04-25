@@ -5,7 +5,7 @@ import '../css/Notfound.css'
 function Notfound({children}) {
   return (
     <div className='notfound'>
-      <img className='Applogo'src={NF_bg} />
+      <img src={NF_bg} />
       {children}
     </div>
   )

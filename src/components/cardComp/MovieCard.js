@@ -1,39 +1,38 @@
 import React from 'react';
 import StarRating from './StarRating';
 import Favorite from './Favorite';
+import { useNavigate } from 'react-router-dom';
 import '../../css/MovieCard.css'
 import 'animate.css';
 
-function MovieCard({ Info, trailersHandler, detailsHandler }) {
+function MovieCard({ moviesInfo }) {
   const path = "https://image.tmdb.org/t/p/w500";
-  const hideNavbar =()=>{
-    document.getElementsByClassName("Navbar")[0].style.display = "none";
-  };
+  const navigate = useNavigate();
 
   return (<div className='MovieCard'>
     <div className='cardSection1'>
-      <img onClick={() => detailsHandler(true, Info)} className="MovieImage" src={`${path}${Info.poster_path}`}/>
-      <button onClick={() => {trailersHandler(true, Info); hideNavbar();}}>
+      <img onClick={()=>navigate(`/details/${moviesInfo.title}/${moviesInfo.id}`,{state:moviesInfo})} className="MovieImage" src={`${path}${moviesInfo.poster_path}`}/>
+      <button onClick={()=>navigate(`/trailer/${moviesInfo.title}/${moviesInfo.id}`)}>
         <i className="fa-solid fa-play"></i>
       </button>
     </div>
     <div className='cardSection2'>
-      <span onClick={() => detailsHandler(true, Info)} className="MovieName">{Info.title}</span>
-      <Favorite movieId={Info.id} />
+      <span onClick={()=>navigate(`/details/${moviesInfo.title}/${moviesInfo.id}`)} className="MovieName">{moviesInfo.title}</span>
+      <Favorite movieId={moviesInfo.id} />
     </div>
-    <StarRating rating={Info.vote_average} />
+    <StarRating rating={moviesInfo.vote_average} />
     <div className="cardSection3">
       <div className='InfoMain'>
         <span>Rating</span>
-        <span>{Info.vote_average}</span>
+        <span>{moviesInfo.vote_average}</span>
       </div>
       <div className='InfoMain'>
         <span>Lang</span>
-        <span>{Info.original_language}</span>
+        <span>{moviesInfo.original_language}</span>
       </div>
       <div className='InfoMain'>
         <span>Review</span>
-        <span>{Info.popularity.toFixed(0)}</span>
+        <span>{moviesInfo.popularity.toFixed(0)}</span>
       </div>
     </div>
   </div>);

@@ -17,7 +17,7 @@
     background:#fafafa;
     outline: none;
     border: none;
-    font-size: 12px;
+    font-size: 13px;
     padding: 0px 10px;
     align-self: center;
     color: #8b7d77;
@@ -93,6 +93,15 @@
       color: #c62828;
   }
 
+  .SearchComp{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 35px;
+    padding: 30px;
+  }
+
   @media only screen and (max-width: 430px) {
     .Searchbar{
         column-gap: 10px;
@@ -118,4 +127,8 @@
       .fa-triangle-exclamation{
         margin-right : 5px;
     }
+    .SearchComp{
+        padding: 25px;
+        gap: 25px;
+    }  
   }

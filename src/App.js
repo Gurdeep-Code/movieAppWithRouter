@@ -1,18 +1,26 @@
-import './App.css';
-import { Provider } from 'react-redux';
-import store from './redux/store';
 import Navbar from './components/Navbar';
-import Main from './components/Main';
-import Notfound from './components/Notfound';
+import MoviesSection from './components/movieSectionComp/MoviesSection';
+import TrailerSection from './components/TrailerSection';
+import DetailsSection from './components/DetailsSection';
+import CardContainer from './components/cardComp/CardContainer';
+import SearchComp from './components/SearchComp';
+import { Routes,Route } from 'react-router-dom';
+import './App.css';
 
 function App() {
   return (
-    <Provider store={store}>
-      <div className="App">
-        <Navbar />
-        <Main />
-      </div>
-    </Provider>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<MoviesSection/>}>
+          <Route index element={<CardContainer/>} /> 
+          <Route path=':sortKey' element={<CardContainer/>} /> 
+        </Route>
+        <Route path='trailer/:movieName/:movieID' element={<TrailerSection/>} />
+        <Route path='details/:title/:movieID' element={<DetailsSection/>} />
+        <Route path='search/:searchKey' element={<SearchComp/>} />
+      </Routes>
+    </>    
   );
 }
 export default App;
